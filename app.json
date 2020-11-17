@@ -1,14 +1,58 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/user/index",
+    "pages/lobby/index",
+    "pages/login/index",
+    "pages/auth/index",
+    "pages/order/index",
+    "pages/map/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Weixin",
-    "navigationBarTextStyle":"black"
+    "navigationBarBackgroundColor": "#3498db",
+    "navigationBarTitleText": "一起走",
+    "navigationBarTextStyle":"white"
   },
+  "tabBar": {
+    "color": "#e4e4e4",
+    "selectedColor": "#3498db",
+    "backgroundColor": "",
+    "position": "bottom",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "发布",
+        "iconPath": "icons/index.png",
+        "selectedIconPath": "icons/index-o.png"
+      },
+      {
+        "pagePath": "pages/order/index",
+        "text": "拼单广场",
+        "iconPath": "icons/order.png",
+        "selectedIconPath": "icons/order-o.png"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "text": "用户",
+        "iconPath": "icons/user.png",
+        "selectedIconPath": "icons/user-o.png"
+      }
+    ]
+  },
+  
   "style": "v2",
   "sitemapLocation": "sitemap.json"
 }
+
+
+
+
+
+
+
+
+
+
+
