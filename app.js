@@ -17,8 +17,19 @@ App({
   onPageNotFound: function(options){
 
   },
+  getLocation:function(params) {
+    wx.getLocation({
+      type: "gcj02",
+      success (res) {
+          console.log(res)
+          return JSON.stringify({res});
+      }
+    })
+  },
   // 全局数据
   globalData: {
-    
+    qqmap:{
+      key:'EKNBZ-WNTKR-Q6SWC-WSQV6-YES6H-4PBNX'
+    }
   }
 });

@@ -1,1 +1,9 @@
 <view >首页</view>
+<view> 
+<view>
+  <button type="reset" bindtap="whereAreYou">点击进行定位</button>
+</view>
+<view>
+  <button type="reset" bindtap="whereAreYouGoing">点击进行导航</button>
+</view>
+</view>
