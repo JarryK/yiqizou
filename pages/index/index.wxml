@@ -1,9 +1,23 @@
-<view >首页</view>
-<view> 
-<view>
-  <button type="reset" bindtap="whereAreYou">点击进行定位</button>
+<view>首页</view>
+<view class="search-box">
+  <view class="search-body">
+    <!-- 出发地址<input type="text" bindinput="Undreaming_ChangeSearchKey" placeholder="" confirm-type="search" bindconfirm="Undreaming_Inquire" /><text class="iconfont icon-sousuo-copy"></text> -->
+    <text class="title">出发地址</text>
+    <input type="text" id="start_loc" value="{{start_lo}}" placeholder="" confirm-type="search" />
+    <text class="iconfont icon-sousuo-copy" data-type='0' bindtap="checkMap"></text>
+  </view>
+  <view class="search-body">
+    <text class="title">目的地地址</text>
+    <input type="text" id="end_loc" value="{{end_lo}}" placeholder="" confirm-type="search" />
+    <text class="iconfont icon-sousuo-copy" data-type='1' bindtap="checkMap"></text>
+  </view>
+  <button bindtap="submitInput">确定</button>
 </view>
-<view>
-  <button type="reset" bindtap="whereAreYouGoing">点击进行导航</button>
-</view>
+<view style="display:none">
+  <view>
+    <button type="reset" bindtap="whereAreYou">点击进行定位</button>
+  </view>
+  <view>
+    <button type="reset" bindtap="whereAreYouGoing">点击进行导航</button>
+  </view>
 </view>

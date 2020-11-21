@@ -7,7 +7,12 @@ const mapKey = app.globalData.qqmap.key;
 var user_location;
 Page({
   data: {
-    
+    start_lo:'',
+    end_lo:'',
+    is_start:'',
+    is_end:'',
+    start_det:'',
+    end_det:''
   },
   //options(Object)
   onLoad: function(options){
@@ -19,26 +24,25 @@ Page({
     
   },
   onShow: function(){
-    qqmapsdk.search({
-      keyword: '酒店',
-      success: function (res) {
-          console.log(res);
-      },
-      fail: function (res) {
-          console.log(res);
-      },
-      complete: function (res) {
-        console.log(res);
+    user_location = chooseLocation.getLocation();
+    console.log(user_location);
+    if(this.data.is_start && !this.data.is_end){
+      this.setData({
+        start_lo:user_location.name,
+        start_det:user_location
+      })
+    }else if(!this.data.is_start && this.data.is_end){
+      this.setData({
+        end_lo:user_location.name
+      })
     }
-});
-  user_location = app.getLocation()
-
 },
   onHide: function(){
 
   },
   onUnload: function(){
-
+    chooseLocation.setLocation(null);
+    user_location = '';  
   },
   onPullDownRefresh: function(){
 
@@ -78,7 +82,6 @@ Page({
     })
   },
   whereAreYouGoing:function(_location){
-
     let key = mapKey;  //使用在腾讯位置服务申请的key
     let referer = '一起走';   //调用插件的app的名称
      //终点
@@ -90,5 +93,50 @@ Page({
     wx.navigateTo({
         url: 'plugin://routePlan/index?key=' + key + '&referer=' + referer + '&endPoint=' + endPoint
     })
+  },
+  checkMap:function(e){
+    var a = e.currentTarget.dataset.type;
+    console.log(a);
+    if(a==0){
+      this.setData({
+        is_start:true,
+        is_end:false
+      })    
+    }else if(a==1){
+      this.setData({
+        is_start:false,
+        is_end:true
+      })   
+    }
+    this.whereAreYou();
+  },
+  submitInput:function(){
+    var st = this.data.start_lo;
+    var end = this.data.end_lo;
+    if(st == '' || st == null || end == null || end == ''){
+      return  wx.showModal({
+        title: '提示',
+        content: '当前没有输入起始地或者目的地',
+        success: function(res) {
+          if (res.confirm) {
+          console.log('用户点击确定')
+          } else if (res.cancel) {
+          console.log('用户点击取消')
+          }
+        }
+      })
+    }
+    wx.showModal({
+			title: '提示',
+			content: '出发地点为:'+ st + ',目的地为：'+ end,
+			success: function(res) {
+				if (res.confirm) {
+				console.log('用户点击确定')
+				} else if (res.cancel) {
+				console.log('用户点击取消')
+				}
+			}
+		})
+   
   }
 });
