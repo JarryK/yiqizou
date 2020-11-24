@@ -1,4 +1,6 @@
 // pages/login/index.js
+var user = require('../../utils/user');
+var util = require('../../utils/util');
 Page({
 
   /**
@@ -62,5 +64,28 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  wxLogin: function(e) {
+    if (e.detail.userInfo == undefined) {
+      app.globalData.hasLogin = false;
+      util.showErrorToast('微信登录失败');
+      return;
+    }
+
+    user.checkLogin().catch(() => {
+      console.log(e.detail);
+      console.log(e.detail.errMsg)
+      console.log(e.detail.iv)
+      console.log(e.detail.encryptedData)
+      user.loginByWeixin(e.detail.userInfo).then(res => {
+        // app.globalData.hasLogin = true;
+        console.log(res)
+      }).catch((err) => {
+      console.log(err)
+        // app.globalData.hasLogin = false;
+        util.showErrorToast(err);
+      });
+
+    });
   }
 })

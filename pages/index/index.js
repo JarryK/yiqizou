@@ -2,6 +2,7 @@
 var QQMapWX = require('../../lib/qqmap-wx-jssdk.js');
 var qqmapsdk;
 const chooseLocation = requirePlugin('chooseLocation');
+var user = require('../../utils/user');
 const app = getApp();// 引入app
 const mapKey = app.globalData.qqmap.key;
 var user_location;
@@ -21,7 +22,12 @@ Page({
   });
   },
   onReady: function(){
-    
+    user.checkLogin().catch(() => {
+      wx.navigateTo({
+         url: "/pages/login/index"
+       });
+ 
+     });
   },
   onShow: function(){
     user_location = chooseLocation.getLocation();

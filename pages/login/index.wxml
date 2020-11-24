@@ -1,2 +1,9 @@
-<!--pages/login/index.wxml-->
-<text>pages/login/index.wxml</text>
+<view class="container">
+
+<image class="avatar" src="../../images/login.png" />
+<view class="my-info-name">一起走吧</view>
+
+<view class="form-box">
+<button type="primary" open-type="getUserInfo" class="login-btn" bindgetuserinfo="wxLogin">微信直接登录</button>
+</view>
+</view>
