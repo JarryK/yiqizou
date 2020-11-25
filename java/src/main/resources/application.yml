@@ -2,7 +2,7 @@ spring:
   resources:
     static-locations: classpath:/static/
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/dtr-system?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/yqz?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
@@ -26,7 +26,7 @@ spring:
       max-file-size: 100MB  # 单个上传文件的最大值
       max-request-size: 100MB  #  多个文件上传的最大值
 mybatis:
-  mapperLocations: classpath:mapper/*.xml  # Mapper 文件路径配置
+  mapperLocations: classpath:Mapper/*.xml  # Mapper 文件路径配置
 logging:
   config: classpath:log4j2-spring.xml # 日志配置路径
 server:

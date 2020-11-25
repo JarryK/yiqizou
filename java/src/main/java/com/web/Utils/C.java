@@ -26,13 +26,13 @@ public class C {
         /**
          * 生成一个map，适用于在controller与页面之间约定返回的JSON-map值
          *
-         * @param code 返回code
+         * @param success 返回成功/失败
          * @param msg 返回msg
          * @return 返回给UI页面page的数据
          */
-        public static Map<String, Object> returnMap(boolean code,String msg) {
+        public static Map<String, Object> returnMap(boolean success,String msg) {
             Map<String, Object> returnMap = new HashMap<String, Object>();
-            returnMap.put("success", code); // controller与页面之间约定的字段
+            returnMap.put("success", success); // controller与页面之间约定的字段
             returnMap.put("msg", msg); // controller与页面之间约定的字段
             return returnMap;
         }
@@ -40,18 +40,74 @@ public class C {
         /**
          * 生成一个map，适用于在controller与页面之间约定返回的JSON-map值
          *
-         * @param code 返回code
+         * @param success 返回成功/失败
          * @param msg 返回msg
          * @param o  返回data
          * @return 返回给UI页面page的数据
          */
-        public static Map<String, Object> returnMap(boolean code,String msg, Object o) {
+        public static Map<String, Object> returnMap(boolean success,String msg, Object o) {
             Map<String, Object> returnMap = new HashMap<String, Object>();
-            returnMap.put("success", code); // controller与页面之间约定的字段
+            returnMap.put("success", success); // controller与页面之间约定的字段
             returnMap.put("msg", msg); // controller与页面之间约定的字段
             returnMap.put("data", o); // controller与页面之间约定的字段
             return returnMap;
         }
+    }
+
+
+    /**
+     * 与bmo交互的数据格式定义
+     */
+    public static class bmo {
+
+        /**
+         * 生成一个map，适用于在controller与bmo之间约定返回的JSON-map值
+         *
+         * @param code 返回code
+         * @param msg  返回msg
+         * @return
+         */
+        public static Map<String, Object> returnMap(int code, String msg) {
+            Map<String, Object> returnMap = new HashMap<>();
+            returnMap.put("success", code);
+            returnMap.put("msg", msg);
+            return returnMap;
+        }
+
+        /**
+         * 生成一个map，适用于在controller与bmo之间约定返回的JSON-map值
+         *
+         * @param success 返回成功/失败
+         * @param msg  返回msg
+         * @return
+         */
+        public static Map<String, Object> returnMap(boolean success, String msg) {
+            return returnMap(success ? 0 : 1, msg);
+        }
+
+        /**
+         * 获取返回的map中的success【结果编码状态】
+         *
+         * @param inMap
+         * @return
+         */
+        public static String returnMapSuccess(Map<String,Object> inMap){
+            Object o = MyUtils.map.getObject(inMap,"success","");
+            o = o == null ? "" : o;
+            String code = o instanceof String ? (String) o : String.valueOf(o);
+            return code;
+        }
+        /**
+         * 识别返回的map是否成功
+         *
+         * @param inMap
+         * @return
+         */
+        public static boolean returnMapBoolean(Map<String,Object> inMap){
+            return "0".equals(returnMapSuccess(inMap));
+        }
+
+
     }
 
 }

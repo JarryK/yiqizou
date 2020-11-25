@@ -1,5 +1,7 @@
 package com.web.Bmo;
 
+import com.web.Bean.User;
+
 import java.util.Map;
 
 /**
@@ -12,9 +14,9 @@ import java.util.Map;
 public interface LoginBmo {
 
     /**
-     * 用户登录
-     * @param inMap
+     * 保存用户登录信息
+     * @param user
      * @return
      */
-    Map<String,Object> userLogin(Map<String,Object> inMap);
+    Map<String,Object> saveUser(User user);
 }
