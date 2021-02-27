@@ -1,6 +1,8 @@
 {
   "pages":[
+    "pages/home/index",
     "pages/index/index",
+    "pages/news/index",
     "pages/user/index",
     "pages/lobby/index",
     "pages/login/index",
@@ -9,10 +11,11 @@
     "pages/map/index"
   ],
   "window":{
-    "backgroundTextStyle":"light",
+    "backgroundTextStyle":"dark",
     "navigationBarBackgroundColor": "#3498db",
     "navigationBarTitleText": "一起走",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle":"white",
+    "enablePullDownRefresh":true
   },
   "tabBar": {
     "color": "#e4e4e4",
@@ -22,16 +25,29 @@
     "borderStyle": "black",
     "list": [
       {
+        "pagePath": "pages/home/index",
+        "text": "首页",
+        "iconPath": "icons/home.png",
+        "selectedIconPath": "icons/home-o.png"
+      },
+
+      {
+        "pagePath": "pages/order/index",
+        "text": "拼单广场",
+        "iconPath": "icons/order.png",
+        "selectedIconPath": "icons/order-o.png"
+      },
+      {
         "pagePath": "pages/index/index",
         "text": "发布",
         "iconPath": "icons/index.png",
         "selectedIconPath": "icons/index-o.png"
       },
       {
-        "pagePath": "pages/order/index",
-        "text": "拼单广场",
-        "iconPath": "icons/order.png",
-        "selectedIconPath": "icons/order-o.png"
+        "pagePath": "pages/news/index",
+        "text": "消息",
+        "iconPath": "icons/news.png",
+        "selectedIconPath": "icons/news-o.png"
       },
       {
         "pagePath": "pages/user/index",

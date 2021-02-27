@@ -43,10 +43,10 @@ public class LoginBmoImpl implements LoginBmo {
             user.setCreate_time(new Date());
             user.setUpData_time(new Date());
             int i = loginDao.save(user);
-            if (i<0){
-                returnMap = C.bmo.returnMap(false,"保存登录信息失败");
-                return returnMap;
-            }
+//            if (i<0){
+//                returnMap = C.bmo.returnMap(false,"保存登录信息失败");
+//                return returnMap;
+//            }
             returnMap = C.bmo.returnMap(true,"保存登录信息成功");
             return returnMap;
         }catch (Exception e){
