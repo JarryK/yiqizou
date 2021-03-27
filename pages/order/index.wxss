@@ -1,1 +1,22 @@
 /* pages/order/index.wxss */
+.input1{
+  display: flex;
+  text-align: center;
+  margin: 10rpx;
+  padding: 10rpx;
+}
+.input1>input{
+  border-color: rgb(243, 241, 241);
+  border-style: solid;
+  width: 70%;
+  height: 70rpx;
+}
+.nagt{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin: auto;
+}
+.nagt>navigator{
+  padding: 20rpx;
+}

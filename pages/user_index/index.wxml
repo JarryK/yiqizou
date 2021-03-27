@@ -1,0 +1,21 @@
+
+<view>
+  <view class="to_go"><navigator>返回</navigator>
+  </view>
+  <view>
+    <view class="img">
+    <image class="img1" mode="widthFix" src="../../images/login.png"></image>
+    </view>
+    <view class="txt"><text>路人甲</text></view>
+  </view>
+<view class="gerenxinxi">
+  <view class="gerenxinxi"><text>学校：闽江大学</text></view>
+  <view class="gerenxinxi"><text>年级：2017级</text></view>
+  <view class="gerenxinxi"><text>学院：计控学院</text></view>
+  <view class="gerenxinxi"><text>信用：100分</text></view>
+
+</view>
+
+
+
+</view>

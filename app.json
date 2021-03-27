@@ -1,20 +1,22 @@
 {
   "pages":[
+    "pages/user_index/index",
+    "pages/order/index",
     "pages/home/index",
     "pages/index/index",
     "pages/news/index",
     "pages/user/index",
+  
     "pages/lobby/index",
     "pages/login/index",
     "pages/auth/index",
-    "pages/order/index",
     "pages/map/index"
   ],
   "window":{
     "backgroundTextStyle":"dark",
-    "navigationBarBackgroundColor": "#3498db",
+    "navigationBarBackgroundColor": "#FFFFFF",
     "navigationBarTitleText": "一起走",
-    "navigationBarTextStyle":"white",
+    "navigationBarTextStyle":"black",
     "enablePullDownRefresh":true
   },
   "tabBar": {

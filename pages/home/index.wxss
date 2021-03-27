@@ -1,1 +1,45 @@
 /* pages/home/index.wxss */
+.quick{
+    margin-top: 30rpx;
+    margin-left: 20rpx;
+}
+swiper{
+    width: 100%;
+    height: calc(100vw * 257 / 500);
+}
+image{
+    width: 100%;
+}
+.bt{
+    margin-top: 40rpx;
+    margin-bottom: 40rpx;
+    padding-left: 50rpx;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.btn{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    height: 60PX;
+    width: 100PX !important;
+    font-size: 12px;
+    font-weight: 400;
+    border-radius: 10px;
+    background-color: rgb(247, 242, 242);
+}
+.btn1{
+    margin: 30px;
+}
+.theme{
+    margin: 20rpx;
+}
+.txt{
+    font-size: 14px;
+    color: gray;
+}
+.btm{
+    margin: 20rpx;
+    color: gainsboro;
+}

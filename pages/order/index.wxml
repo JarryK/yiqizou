@@ -1,2 +1,17 @@
-<!--pages/order/index.wxml-->
-<text>pages/order/index.wxml</text>
+<view>
+  <view><text>这是拼单广场</text></view>
+  <view class="input1">
+   <input type="search" placeholder="请输入你想要的信息！" name="" id="" /><button>搜索</button>
+  </view>
+<view class="nagt">
+  <navigator url="" open-type="redirect" hover-class="other-navigator-hover">进行中</navigator>
+  <navigator url="" >已结束</navigator>
+  <navigator url="" >已超时</navigator>
+  <navigator url="" >已取消</navigator>
+  <navigator url="" >拼车成功</navigator>
+</view>
+
+</view>
+
+
+

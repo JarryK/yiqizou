@@ -1,2 +1,31 @@
-<!--pages/user/index.wxml-->
-<text>pages/user/index.wxml</text>
+<view>
+<view class="new_index1"> <text>个人资料</text></view>
+<view class="new_index2">
+    <view class="img">
+      <image class="img1" mode="widthFix" src="../../images/login.png"></image>
+    </view>
+    <view class="new_index3">
+      <view class="txt"><text>路人甲</text></view>
+      <view class="btn"><button>个人资料></button></view>
+    </view>
+</view>
+<view class="new_index4">
+  <text>履约率：100%。非常牛逼，666！</text>
+</view>
+<view class="new_index6">
+  <view class="new_index5">
+  <text>手机账号安全中心</text>
+</view>
+<view class="new_index5">
+  <text>帮助与反馈</text>
+</view>
+<view class="new_index5">
+  <text>请给我好评！</text>
+</view>
+</view>
+<view class="btn1">
+  <button>退出登录</button>
+</view>
+
+
+</view>

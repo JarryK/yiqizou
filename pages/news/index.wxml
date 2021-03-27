@@ -1,2 +1,1 @@
-<!--pages/news/index.wxml-->
-<text>pages/news/index.wxml</text>
+<view class="news"><text>消息列表</text></view>

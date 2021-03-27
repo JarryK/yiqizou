@@ -1,4 +1,39 @@
 <!--pages/home/index.wxml-->
-<view>这是首页</view>
 
-<view>快速操作</view>
+<swiper autoplay interval="3000" circular indicator-dots >
+    <swiper-item class="" item-id="">
+        <image mode="widthFix" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3271500658,2480755539&fm=26&gp=0.jpg" />
+    </swiper-item>
+    <swiper-item class="" item-id="">
+        <image mode="widthFix" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2090563700,61452994&fm=26&gp=0.jpg" />
+    </swiper-item>
+    <swiper-item class="" item-id="">
+        <image mode="widthFix" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3237018989,1843456595&fm=26&gp=0.jpg" />
+    </swiper-item>
+</swiper>
+
+
+
+
+<view>
+<view class="quick"><text>快速操作</text></view>
+ <view>
+     <view class="bt">
+     <view class="btn1"><button class="btn">查找拼车</button></view>  
+     <view class="btn1"><button class="btn">拼车大厅</button></view>
+     <view class="btn1"><button class="btn">发起拼车</button></view>
+     <view class="btn1"><button class="btn">历史记录</button></view>
+     </view> 
+  
+ </view>
+</view>
+<view>
+    <view class="quick">公告信息</view>
+    <view class="theme"><text>标题一</text></view>
+    <view class="txt">
+        <text>山东潍坊微软分为除非五分隔热隔热个个人隔热隔热山东潍坊微软分为除非五分隔热隔热个个人隔热隔热</text>
+    </view>
+    <view class="btm">
+        文字来源 | 时间 | 其他信息
+    </view>
+</view>

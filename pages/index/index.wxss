@@ -3,12 +3,48 @@
   border-radius: 5rpx;
 }
 .search-box{
-  width: 75%;
+  width: 85%;
   margin: 0 auto;
+  background-color: white;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+
+}
+.search-body{
+  padding: 10rpx;
+  border-bottom: 1px solid rgb(235, 233, 233);
+  justify-content: center;
+  height: 70rpx;
 }
 .search-body>text{
-  display: inline;
+  float: left;
+  justify-content: center;
 }
 .search-body>input{
-  padding: 2rpx 4rpx;
+  padding: 6rpx 8rpx;
+  margin-left: 6rpx;
+  text-align: center;
+}
+.idx{
+  background-color: gainsboro;
+  position: relative;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+.faqipinche{
+  text-align: center;
+  font-size: 18px;
+  font-weight: 800;
+  padding: 50rpx;
+}
+
+button{
+  background-color: rgb(73, 192, 247);
+  margin: 70rpx;
+  color: white;
+  width: 260px !important;
+  height: 40px;
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
 }
