@@ -65,15 +65,12 @@ function post(url, data) {
       url: url,
       data: _data,
       method: 'POST',
-      header: {
-        'Content-Type': 'application/json'
-      },
       success: function (res) {
         console.log(res)
-        if (res.data.success) {
+        if (res.data.code == 200) {
           resolve(res.data);
         } else {
-          reject(res.data.msg);
+          showErrorToast(res.data.message);
         }
       },
       fail: function (err) {

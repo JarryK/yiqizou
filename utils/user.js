@@ -50,11 +50,12 @@ function loginByWeixin(userInfo) {
       //登录
       util.post(api.login, {code: res.code,userInfo: userInfo }).then(res => {
         console.log(res)
-        if (res.success) {
+        if (res.code == 200) {
           //存储用户信息
           setUserData(userInfo,res.data);
           wx.setStorageSync('userInfo', userInfo);
           wx.setStorageSync('token', res.data);
+          console.log(wx.login());
           resolve(res);
           wx.navigateBack({
             delta: 1
