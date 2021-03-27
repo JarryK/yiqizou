@@ -24,7 +24,7 @@ Page({
   onReady: function(){
     user.checkLogin().catch(() => {
       wx.navigateTo({
-         url: "/pages/login/index"
+         url: "/pages/login/login"
        });
  
      });

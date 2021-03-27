@@ -1,8 +1,6 @@
-package com.web.Bmo;
+package com.web.service;
 
-import com.web.Bean.User;
-
-import java.util.Map;
+import com.web.bean.User;
 
 /**
  * <b>项目名称：</b>yiziqou<br>
@@ -11,12 +9,12 @@ import java.util.Map;
  * <b>类描述：</b><br>
  * <b>创建时间：</b>2020/11/24 22:48<br>
  */
-public interface LoginBmo {
+public interface LoginService {
 
     /**
      * 保存用户登录信息
      * @param user
      * @return
      */
-    Map<String,Object> saveUser(User user);
+    int saveUser(User user) throws Exception;
 }

@@ -73,6 +73,7 @@ Page({
     }
 
     user.checkLogin().catch(() => {
+      console.log(e);
       console.log(e.detail);
       console.log(e.detail.errMsg)
       console.log(e.detail.iv)
@@ -83,7 +84,6 @@ Page({
       }).catch((err) => {
       console.log(err)
         // app.globalData.hasLogin = false;
-        util.showErrorToast(err);
       });
 
     });

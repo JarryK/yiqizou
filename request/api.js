@@ -2,7 +2,7 @@
 // 本机开发时使用
  var apiRoot = 'http://localhost:8085/';
 module.exports = {
-  login: apiRoot + 'yqz/login/check', //微信登录
+  login: apiRoot + 'yqz/login/wxLogin', //微信登录
   showFuzzyOrder: apiRoot + 'yqz/order/fuzzy', //按起点 终点显示行程 模糊匹配
   publish : apiRoot +'yqz/order/publish', //发布订单
   queryOrder : apiRoot+'yqz/order/query', //查询订单

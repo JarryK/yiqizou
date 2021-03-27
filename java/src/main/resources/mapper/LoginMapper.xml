@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<<<<<<< HEAD:java/src/main/resources/Mapper/LoginMapper.xml
 <mapper namespace="com.web.Dao.LoginDao">
     <insert id="save" parameterType="com.web.Bean.User">
         INSERT INTO user
+=======
+<mapper namespace="com.web.dao.UserInfoMapper">
+
+    <insert id="save" parameterType="com.web.bean.User">
+        INSERT INTO USER
+>>>>>>> dev-yks:java/src/main/resources/mapper/LoginMapper.xml
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="user_id != null">
                 user_id,
