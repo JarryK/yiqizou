@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSON;
 import com.web.base.CommonParams;
 import com.web.base.RestResult;
 import com.web.bean.User;
+import com.web.controller.BaseController;
 import com.web.service.LoginService;
 import com.web.dao.UserInfoMapper;
 import com.web.hotdata.HotDataStore;
@@ -22,7 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -52,11 +55,16 @@ public class LoginController extends BaseController {
 
     private final WeiXinService weiXinService;
 
-//    @ResponseBody
-//    @RequestMapping("/getInfo")
-//    public RestResult<Object> bindWx(@RequestBody  Map<String, Object> inMap, HttpSession session) throws Exception {
-//
-//    }
+    @ResponseBody
+    @RequestMapping("/checkLogin")
+    public RestResult<Object> bindWx(@RequestBody  Map<String, Object> inMap, HttpServletRequest request) throws Exception {
+        SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
+        if (StpUtil.isLogin()){
+            return RestResult.success("已登录");
+        }else {
+            return RestResult.error("未登录");
+        }
+    }
 
     /**
      * emoji表情替换
@@ -103,6 +111,7 @@ public class LoginController extends BaseController {
             user.setProvince(province);
             user.setCountry(country);
             user.setAvatarUrl(avatarUrl);
+            user.setLastLoginTime(new Date());
             int i;
             Example example = new Example(User.class);
             Example.Criteria criteria = example.createCriteria();
@@ -111,8 +120,10 @@ public class LoginController extends BaseController {
             if (list.size() > 0){
                 User user1 = list.get(0);
                 user.setUser_id(user1.getUser_id());
+                user.setUpDataTime(new Date());
                 i = userInfoMapper.updateByPrimaryKey(user);
             }else {
+                user.setCreateTime(new Date());
                 i = loginBmo.saveUser(user);
             }
             if (i < 1){
@@ -120,12 +131,7 @@ public class LoginController extends BaseController {
             }
             hotDataStore.set(session.getId() + "_userInfo",user);
             StpUtil.setLoginId(user.getUser_id());
-            boolean login = StpUtil.isLogin();
             SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
-            // 类似查询API还有：
-            String loginIdAsString = StpUtil.getLoginIdAsString();// 获取当前会话登录id, 并转化为`String`类型
-            int loginIdAsInt = StpUtil.getLoginIdAsInt();// 获取当前会话登录id, 并转化为`int`类型
-            long loginIdAsLong = StpUtil.getLoginIdAsLong();// 获取当前会话登录id, 并转化为`long`类型
             Map<String,Object> tokenMap = new HashMap<>();
             tokenMap.put("tokenName",tokenInfo.getTokenName());
             tokenMap.put("tokenValue",tokenInfo.getTokenValue());

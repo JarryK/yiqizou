@@ -76,5 +76,22 @@ public class User extends TimeModel {
     @ApiModelProperty(value = "电话")
     private String phone;
 
+    @Column(name = "credit_score")
+    @ApiModelProperty(value = "信用分")
+    private String creditScore;
+
+    @Column(name = "register_id")
+    @ApiModelProperty(value = "认证Id")
+    private long registerId;
+
+    @Column(name = "register_status")
+    @ApiModelProperty(value = "认证状态")
+    private int registerStatus;
+
+    @Column(name = "last_login_time")
+    @ApiModelProperty(value = "最后登录时间")
+    private Date lastLoginTime;
+
+
 
 }
