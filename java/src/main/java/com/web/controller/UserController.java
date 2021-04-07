@@ -1,12 +1,8 @@
 package com.web.controller;
 
-import cn.dev33.satoken.stp.SaTokenInfo;
-import cn.dev33.satoken.stp.StpUtil;
 import com.alibaba.fastjson.JSON;
-import com.web.base.CommonParams;
 import com.web.base.RestResult;
-import com.web.bean.User;
-import com.web.controller.BaseController;
+import com.web.model.User;
 import com.web.service.LoginService;
 import com.web.dao.UserInfoMapper;
 import com.web.hotdata.HotDataStore;
@@ -15,7 +11,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.MapUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,10 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,31 +48,6 @@ public class LoginController extends BaseController {
 
     private final WeiXinService weiXinService;
 
-    @ResponseBody
-    @RequestMapping("/checkLogin")
-    public RestResult<Object> bindWx(@RequestBody  Map<String, Object> inMap, HttpServletRequest request) throws Exception {
-        SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
-        if (StpUtil.isLogin()){
-            return RestResult.success("已登录");
-        }else {
-            return RestResult.error("未登录");
-        }
-    }
-
-    /**
-     * emoji表情替换
-     *
-     * @param source 原字符串
-     * @return 过滤后的字符串
-     */
-    public static String filterEmoji(String source,String slipStr) {
-        if(StringUtils.isNotBlank(source)){
-            return source.replaceAll("[\\ud800\\udc00-\\udbff\\udfff\\ud800-\\udfff]", slipStr);
-        }else{
-            return source;
-        }
-    }
-
     @ApiOperation("微信登录")
     @ResponseBody
     @RequestMapping("/wxLogin")
@@ -87,12 +55,9 @@ public class LoginController extends BaseController {
         try {
             log.info("inMap:" + JSON.toJSONString(inMap));
             Map<String,Object> userInfo = (Map<String, Object>) MapUtils.getMap(inMap,"userInfo", new LinkedHashMap());
-            // LinkedHashMap转实列对象
-//            User user = JSON.parseObject(JSON.toJSONString(userInfo), new TypeReference<User>() { });
-
             String code = MapUtils.getString(inMap,"code").trim();
             String openid = weiXinService.getOpenId(code);
-            String nickName = filterEmoji(MapUtils.getString(userInfo,"nickName"),"");
+            String nickName = weiXinService.filterEmoji(MapUtils.getString(userInfo,"nickName"),"");
             int gender = (int) MapUtils.getObject(userInfo,"gender");
             String language = MapUtils.getString(userInfo,"language");
             String city = MapUtils.getString(userInfo,"city");
@@ -119,7 +84,7 @@ public class LoginController extends BaseController {
             List<User> list = userInfoMapper.selectByExample(example);
             if (list.size() > 0){
                 User user1 = list.get(0);
-                user.setUser_id(user1.getUser_id());
+                user.setUserId(user1.getUserId());
                 user.setUpDataTime(new Date());
                 i = userInfoMapper.updateByPrimaryKey(user);
             }else {
@@ -127,15 +92,9 @@ public class LoginController extends BaseController {
                 i = loginBmo.saveUser(user);
             }
             if (i < 1){
-                return RestResult.error("保存用户信息失败！");
+                return RestResult.error("登陆失败！");
             }
-            hotDataStore.set(session.getId() + "_userInfo",user);
-            StpUtil.setLoginId(user.getUser_id());
-            SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
-            Map<String,Object> tokenMap = new HashMap<>();
-            tokenMap.put("tokenName",tokenInfo.getTokenName());
-            tokenMap.put("tokenValue",tokenInfo.getTokenValue());
-            return RestResult.success("保存用户信息成功",tokenMap);
+            return RestResult.success("登录成功",weiXinService.wxLogin(user));
         } catch (Exception e) {
             log.error("获取用户信息异常", e);
             return RestResult.error("登录异常！");

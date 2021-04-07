@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.security.mapper.UserSecurityMapper">
+
+  <resultMap id="BaseResultMap" type="com.web.security.model.UserSecurity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="account_non_expired" jdbcType="BIT" property="accountNonExpired" />
+    <result column="account_non_locked" jdbcType="BIT" property="accountNonLocked" />
+    <result column="credentia_isn_on_expired" jdbcType="BIT" property="credentialsNonExpired" />
+    <result column="enabled" jdbcType="BIT" property="enabled" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <collection ofType="com.web.security.model.Role" property="roles" >
+    	<id column="role_id" jdbcType="BIGINT" property="id" />
+	    <result column="role_name" jdbcType="VARCHAR" property="name" />
+	    <result column="role_status" jdbcType="BIT" property="status" />
+	    <result column="role_description" jdbcType="VARCHAR" property="description" />
+	    <result column="role_create_by" jdbcType="VARCHAR" property="createBy" />
+	    <result column="role_update_by" jdbcType="VARCHAR" property="updateBy" />
+	    <result column="role_create_time" jdbcType="TIMESTAMP" property="createTime" />
+	    <result column="role_update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </collection>
+  </resultMap>
+  
+  <select id="findUserById" resultMap="BaseResultMap">
+       	SELECT a.*,c.id as role_id,c.name as role_name,c.status as role_status,c.description as role_description,
+       		c.create_by as role_create_by,c.update_by as role_update_by,
+       		c.create_time as role_create_time,c.update_time as role_update_time
+		FROM sys_user_security a 
+		LEFT JOIN sys_user_role b ON a.id = b.user_id
+		LEFT JOIN sys_role c ON b.role_id = c.id
+		WHERE a.id = #{ id }
+   </select>
+   
+   <select id="findUserByUsername" resultMap="BaseResultMap">
+       	SELECT a.*,c.id as role_id,c.name as role_name,c.status as role_status,c.description as role_description,
+       		c.create_by as role_create_by,c.update_by as role_update_by,
+       		c.create_time as role_create_time,c.update_time as role_update_time
+		FROM sys_user_security a 
+		LEFT JOIN sys_user_role b ON a.id = b.user_id
+		LEFT JOIN sys_role c ON b.role_id = c.id
+		WHERE a.username = #{ username }
+   </select>
+   
+</mapper>

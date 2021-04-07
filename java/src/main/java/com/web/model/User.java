@@ -1,6 +1,5 @@
-package com.web.bean;
+package com.web.model;
 
-import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -12,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -34,7 +32,7 @@ public class User extends TimeModel {
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(value = "用户id")
-    private long user_id;
+    private Long userId;
 
     @Column(name = "open_id")
     @ApiModelProperty(value = "标识id")

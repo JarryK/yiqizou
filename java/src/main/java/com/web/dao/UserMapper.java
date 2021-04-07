@@ -1,6 +1,6 @@
 package com.web.dao;
 
-import com.web.bean.User;
+import com.web.model.User;
 import tk.mybatis.mapper.common.Mapper;
 
 
