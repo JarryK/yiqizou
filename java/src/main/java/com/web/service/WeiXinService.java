@@ -1,6 +1,9 @@
 package com.web.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.web.model.User;
+
+import java.util.Map;
 
 /**
  * <b>项目名称：</b>yiziqou<br>
@@ -24,4 +27,19 @@ public interface WeiXinService {
      * @return
      */
     public JSONObject getUserInfo(String openid) throws Exception;
+
+    /**
+     * emoji表情替换
+     *
+     * @param source 原字符串 slipStr 替换的字符
+     * @return 过滤后的字符串
+     */
+    public String filterEmoji(String source,String slipStr);
+
+    /**
+     * 微信登录
+     * @param user
+     * @return
+     */
+    public Map<String,Object> wxLogin(User user);
 }
