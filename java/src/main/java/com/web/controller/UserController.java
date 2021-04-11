@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.web.base.RestResult;
 import com.web.model.User;
 import com.web.model.qo.WeiXinLogin;
-import com.web.dao.UserMapper;
+import com.web.mapper.UserMapper;
 import com.web.hotdata.HotDataStore;
 import com.web.service.UserService;
 import com.web.service.WeiXinService;
@@ -13,7 +13,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.MapUtils;
-import org.springframework.validation.annotation.Validated;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,8 +35,9 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/yqz/user")
 @Api(tags = "登录相关操作")
-public class UserController extends BaseController {
+public class UserController {
 
+    private final Logger log = LoggerFactory.getLogger(getClass());
     private final HotDataStore hotDataStore;
 
     private final UserMapper mapper;
@@ -74,6 +76,7 @@ public class UserController extends BaseController {
             user.setCountry(country);
             user.setAvatarUrl(avatarUrl);
             user.setLastLoginTime(new Date());
+            user.setCreditScore(100);
             User user_info = service.selectByOpenId(openid);
             if (Validator.isNotNull(user_info)){
                 user.setUserId(user_info.getUserId());
@@ -93,5 +96,6 @@ public class UserController extends BaseController {
             return RestResult.error("登录异常！");
         }
     }
+
 
 }
