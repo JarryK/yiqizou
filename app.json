@@ -1,14 +1,14 @@
 {
   "pages":[
-    "pages/user_index/index",
-    "pages/order/index",
     "pages/home/index",
+    "pages/order/index",
     "pages/index/index",
+    "pages/login/login",
     "pages/news/index",
     "pages/user/index",
+    "pages/user_index/index",
   
     "pages/lobby/index",
-    "pages/login/login",
     "pages/auth/index",
     "pages/map/index"
   ],

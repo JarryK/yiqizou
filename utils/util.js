@@ -1,6 +1,5 @@
 var api = require('../request/api');
 var app = getApp();
-
 function formatTime(date) {
   var year = date.getFullYear();
   var month = date.getMonth() + 1;
@@ -60,18 +59,20 @@ function request(url, data = {}, method = "POST") {
 
 function post(url, data) {
   var _data = data == null ? {} : data;
+  var _token = wx.getStorageSync('userToekn') == null ? "" : wx.getStorageSync('userToekn');
+  console.log(_token);
+  _data.satoken = _token;
   return new Promise(function (resolve, reject) {
     wx.request({
       url: url,
       data: _data,
       method: 'POST',
+      header: {
+        "Authorization":_token
+      },
       success: function (res) {
         console.log(res)
-        if (res.data.code == 200) {
-          resolve(res.data);
-        } else {
-          showErrorToast(res.data.message);
-        }
+        resolve(res.data);
       },
       fail: function (err) {
         reject(err)
@@ -98,6 +99,13 @@ function showErrorToast(msg) {
   wx.showToast({
     title: msg,
     image: '/images/error.png'
+  })
+}
+function showErrorToast(msg,callBack) {
+  wx.showToast({
+    title: msg,
+    image: '/images/error.png',
+    success: callBack()
   })
 }
 

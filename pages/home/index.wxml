@@ -19,7 +19,7 @@
 <view class="quick"><text>快速操作</text></view>
  <view>
      <view class="bt">
-     <view class="btn1"><button class="btn">查找拼车</button></view>  
+     <view class="btn1"><button bindtap="test" class="btn">查找拼车</button></view>  
      <view class="btn1"><button class="btn">拼车大厅</button></view>
      <view class="btn1"><button class="btn">发起拼车</button></view>
      <view class="btn1"><button class="btn">历史记录</button></view>

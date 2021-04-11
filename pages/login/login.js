@@ -1,6 +1,7 @@
 // pages/login/index.js
 var user = require('../../utils/user');
 var util = require('../../utils/util');
+var app = getApp();
 Page({
 
   /**
@@ -71,19 +72,12 @@ Page({
       util.showErrorToast('微信登录失败');
       return;
     }
-
     user.checkLogin().catch(() => {
-      console.log(e);
-      console.log(e.detail);
-      console.log(e.detail.errMsg)
-      console.log(e.detail.iv)
-      console.log(e.detail.encryptedData)
       user.loginByWeixin(e.detail.userInfo).then(res => {
-        // app.globalData.hasLogin = true;
-        console.log(res)
+        app.globalData.hasLogin = true;
       }).catch((err) => {
-      console.log(err)
-        // app.globalData.hasLogin = false;
+        app.globalData.hasLogin = false;
+        util.showErrorToast('微信登录失败');
       });
 
     });

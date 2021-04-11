@@ -116,9 +116,16 @@ Page({
     }
     this.whereAreYou();
   },
-  submitInput:function(){
-    var st = this.data.start_lo;
-    var end = this.data.end_lo;
+  
+  submitFrom:function(e){
+    console.log(e.detail.value)
+    console.log(e.detail.value.startLoc)
+    console.log(e.detail.value.endLoc)
+    console.log(e.detail.value.startTime)
+    console.log(e.detail.value.platform)
+    console.log(e.detail.value.number)
+    console.log(e.detail.value.remark)
+    console.log(e.detail.value.code)
     if(st == '' || st == null || end == null || end == ''){
       return  wx.showModal({
         title: '提示',

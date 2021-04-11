@@ -3,6 +3,7 @@
  */
 const util = require('./util.js');
 const api = require('../request/api.js');
+const app = getApp();// 引入app
 
 
 /**
@@ -49,17 +50,20 @@ function loginByWeixin(userInfo) {
     return login().then((res) => {
       //登录
       util.post(api.login, {code: res.code,userInfo: userInfo }).then(res => {
-        console.log(res)
         if (res.code == 200) {
           //存储用户信息
-          setUserData(userInfo,res.data);
-          wx.setStorageSync('userInfo', userInfo);
-          wx.setStorageSync('token', res.data);
-          console.log(wx.login());
+          setUserData(userInfo);
+
+          console.log(res.data.token);
+          var a = res.data.token;
+          wx.setStorage({
+            key:'userToekn', 
+            data:a})
           resolve(res);
           wx.navigateBack({
             delta: 1
           })
+          util.showSuccessToast("登录成功")
         } else {
           reject(res);
         }
@@ -91,9 +95,8 @@ function checkLogin() {
     }
   });
 }
-function setUserData(userInfo,token){
+function setUserData(userInfo){
   wx.setStorageSync('userInfo', userInfo);
-  wx.setStorageSync('token', token);
 }
 module.exports = {
   loginByWeixin,

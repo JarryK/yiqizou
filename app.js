@@ -26,10 +26,17 @@ App({
       }
     })
   },
+  getToken:function(){
+    return wx.getStorageSync('user_token');
+  },
+  setToken:function(data){
+    return wx.setStorageSync('user_toekn', data)
+  },
   // 全局数据
   globalData: {
     qqmap:{
       key:'EKNBZ-WNTKR-Q6SWC-WSQV6-YES6H-4PBNX'
-    }
+    },
+    token:""
   }
 });

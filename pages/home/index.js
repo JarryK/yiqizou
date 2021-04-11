@@ -1,3 +1,6 @@
+var user = require('../../utils/user');
+var util = require('../../utils/util');
+var api = require('../../request/api')
 // pages/home/index.js
 Page({
 
@@ -19,7 +22,12 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    user.checkLogin().catch(() => {
+      wx.navigateTo({
+         url: "/pages/login/login"
+       });
+ 
+     });
   },
 
   /**
@@ -27,6 +35,11 @@ Page({
    */
   onShow: function () {
 
+  },
+  test: function(){
+    wx.navigateTo({
+      url: "/pages/login/login"
+    });
   },
 
   /**

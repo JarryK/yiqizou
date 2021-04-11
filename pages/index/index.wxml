@@ -1,57 +1,45 @@
 <view class="idx">
-<view class="faqipinche"><text>发起拼车</text></view>
-<view class="form">
-<view class="search-box">
-  <view class="search-body">
-    <text class="title">起始地点</text>
-    <input type="text" id="start_loc" value="{{start_lo}}" placeholder="请输入起始集合点" confirm-type="search" />
-    <!-- <text class="iconfont icon-sousuo-copy" data-type='0' bindtap="checkMap"></text> -->
+  <view class="faqipinche"><text>发起拼车</text></view>
+  <view class="form">
+    <from bindsubmit="submitFrom">
+      <view class="search-box">
+        <view class="search-body">
+          <text class="title">起始地点</text>
+          <input type="text" name="startLoc" placeholder="请输入起始集合点" confirm-type="search" />
+          <!-- <text class="iconfont icon-sousuo-copy" data-type='0' bindtap="checkMap"></text> -->
+        </view>
+        <view class="search-body">
+          <text class="title">目的地址</text>
+          <input type="text" name="endLoc" placeholder="请输入目的地" confirm-type="search" />
+          <!-- <text class="iconfont icon-sousuo-copy" data-type='1' bindtap="checkMap"></text> -->
+        </view>
+        <view class="search-body">
+          <text class="title">出发时间</text>
+          <input type="text" name="startTime"  placeholder="年/月/日" confirm-type="search" />
+          <!-- <text class="iconfont icon-sousuo-copy" data-type='1' bindtap="checkMap"></text> -->
+        </view>
+        <view class="search-body">
+          <text class="title">预计使用拼车平台</text>
+          <input type="text" name="platform" placeholder="滴滴，曹超" confirm-type="search" />
+          <!-- <text class="iconfont icon-sousuo-copy" data-type='1' bindtap="checkMap"></text> -->
+        </view>
+        <view class="search-body">
+          <text class="title">拼车人数</text>
+          <input type="text" name="number"  placeholder="请输入人数" confirm-type="search" />
+          <!-- <text class="iconfont icon-sousuo-copy" data-type='1' bindtap="checkMap"></text> -->
+        </view>
+        <view class="search-body">
+          <text class="title">备注信息</text>
+          <input type="text" name="remark"  placeholder="备注" confirm-type="search" />
+          <!-- <text class="iconfont icon-sousuo-copy" data-type='1' bindtap="checkMap"></text> -->
+        </view>
+        <view class="search-body">
+          <text class="title">验证码</text>
+          <input type="text" name="code" placeholder="请输入验证码" confirm-type="search" />
+          <!-- <text class="iconfont icon-sousuo-copy" data-type='1' bindtap="checkMap"></text> -->
+        </view>
+      </view>
+      <button formType="submit">提交</button>
+    </from>
   </view>
-  <view class="search-body">
-    <text class="title">目的地址</text>
-    <input type="text" id="end_loc" value="{{end_lo}}" placeholder="请输入目的地" confirm-type="search" />
-    <!-- <text class="iconfont icon-sousuo-copy" data-type='1' bindtap="checkMap"></text> --> 
-  </view>
-  <view class="search-body">
-    <text class="title">出发时间</text>
-    <input type="text" id="end_loc" value="{{end_lo}}" placeholder="年/月/日" confirm-type="search" />
-    <!-- <text class="iconfont icon-sousuo-copy" data-type='1' bindtap="checkMap"></text> --> 
-  </view>
-  <view class="search-body">
-    <text class="title">集合时间</text>
-    <input type="text" id="end_loc" value="{{end_lo}}" placeholder="年/月/日" confirm-type="search" />
-    <!-- <text class="iconfont icon-sousuo-copy" data-type='1' bindtap="checkMap"></text> --> 
-  </view>
-  <view class="search-body">
-    <text class="title">预计使用拼车平台</text>
-    <input type="text" id="end_loc" value="{{end_lo}}" placeholder="滴滴，曹超" confirm-type="search" />
-    <!-- <text class="iconfont icon-sousuo-copy" data-type='1' bindtap="checkMap"></text> --> 
-  </view>
-  <view class="search-body">
-    <text class="title">拼车人数</text>
-    <input type="text" id="end_loc" value="{{end_lo}}" placeholder="请输入人数" confirm-type="search" />
-    <!-- <text class="iconfont icon-sousuo-copy" data-type='1' bindtap="checkMap"></text> --> 
-  </view>
-  <view class="search-body">
-    <text class="title">备注信息</text>
-    <input type="text" id="end_loc" value="{{end_lo}}" placeholder="备注" confirm-type="search" />
-    <!-- <text class="iconfont icon-sousuo-copy" data-type='1' bindtap="checkMap"></text> --> 
-  </view>
-  <view class="search-body">
-    <text class="title">验证码</text>
-    <input type="text" id="end_loc" value="{{end_lo}}" placeholder="请输入验证码" confirm-type="search" />
-    <!-- <text class="iconfont icon-sousuo-copy" data-type='1' bindtap="checkMap"></text> --> 
-  </view>
-</view>
-<!-- <view style="display:none">
-  <view>
-    <button type="reset" bindtap="whereAreYou">点击进行定位</button>
-  </view>
-  <view>
-    <button type="reset" bindtap="whereAreYouGoing">点击进行导航</button>
-  </view>
-</view> -->
-
-</view>
-<button  bindtap="submitInput">提交</button>
 </view>
