@@ -1,5 +1,6 @@
 package com.web.model;
 
+import com.web.base.TimeModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper=false)
 @Entity
 @Table(name = "school")
-public class School {
+public class School extends TimeModel {
     @Id
     @Column(name = "school_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

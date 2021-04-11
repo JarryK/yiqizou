@@ -84,8 +84,12 @@ public class User extends TimeModel {
     private long registerId;
 
     @Column(name = "register_status")
-    @ApiModelProperty(value = "认证状态")
+    @ApiModelProperty(value = "认证状态 1=未认证 2=已认证")
     private int registerStatus;
+
+    @Column(name = "school_id")
+    @ApiModelProperty(value = "学校id")
+    private int schoolId;
 
     @Column(name = "last_login_time")
     @ApiModelProperty(value = "最后登录时间")
