@@ -9,11 +9,11 @@ import tk.mybatis.spring.annotation.MapperScan;
 @SpringBootApplication
 @EnableScheduling
 @ComponentScan(basePackages = "com.web")
-@MapperScan({"com.web.Dao","com.web.security.mapper","com.web.file.mapper"})
-public class YiQiZouApplication {
+@MapperScan({"com.web.mapper","com.web.security.mapper","com.web.file.mapper"})
+public class YqzApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(YiQiZouApplication.class, args);
+        SpringApplication.run(YqzApplication.class, args);
     }
 
 }
