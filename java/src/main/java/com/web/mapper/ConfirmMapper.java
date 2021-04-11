@@ -1,4 +1,4 @@
-package com.web.dao;
+package com.web.mapper;
 
 
 import com.web.model.Confirm;

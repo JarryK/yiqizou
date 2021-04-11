@@ -1,4 +1,4 @@
-package com.web.dao;
+package com.web.mapper;
 
 import com.web.model.User;
 import io.lettuce.core.dynamic.annotation.Param;
