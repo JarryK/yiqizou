@@ -2,11 +2,14 @@ package com.web.controller;
 
 import cn.hutool.core.lang.Validator;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.web.base.RestResult;
 import com.web.model.User;
 import com.web.model.qo.WeiXinLogin;
 import com.web.mapper.UserMapper;
 import com.web.hotdata.HotDataStore;
+import com.web.security.model.qo.AuthUserQo;
+import com.web.security.service.IUserSecurityService;
 import com.web.service.UserService;
 import com.web.service.WeiXinService;
 import io.swagger.annotations.Api;
@@ -15,13 +18,16 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,8 +48,7 @@ public class UserController {
 
     private final UserMapper mapper;
     private final UserService service;
-
-
+    private final IUserSecurityService userSecurityService;
 
     private final WeiXinService weiXinService;
 
@@ -59,6 +64,7 @@ public class UserController {
             if (openid.equals("")){
                 return RestResult.error("授权失败");
             }
+            JSONObject jsonObject = weiXinService.getUserInfo(openid);
             String nickName = weiXinService.filterEmoji(MapUtils.getString(userInfo,"nickName"),"");
             int gender = (int) MapUtils.getObject(userInfo,"gender");
             String language = MapUtils.getString(userInfo,"language");
@@ -95,6 +101,27 @@ public class UserController {
             log.error("获取用户信息异常", e);
             return RestResult.error("登录异常！");
         }
+    }
+
+    @ApiOperation("账号密码登录")
+    @ResponseBody
+    @RequestMapping("/signIn")
+    public RestResult<Object> getUserInfo(@Validated @RequestBody AuthUserQo info, HttpSession session) throws Exception {
+        String username = info.getUsername();
+        String key = "";
+        if (Validator.isMobile(username)){
+            key = "phone";
+        }else {
+            key = "userId";
+        }
+        Example example = new Example(User.class);
+        example.createCriteria().andEqualTo(key,username);
+        List<User> userList = mapper.selectByExample(example);
+        if (userList.size() < 1 ){
+            return RestResult.error("用户不存在");
+        }
+        info.setUsername(String.valueOf(userList.get(0).getUserId()));
+        return RestResult.success("登录成功",userSecurityService.login(info) );
     }
 
 

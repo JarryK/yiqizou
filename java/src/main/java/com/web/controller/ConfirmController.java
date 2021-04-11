@@ -32,7 +32,6 @@ import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -55,10 +54,10 @@ public class ConfirmController {
     @RequestMapping("/append")
     public RestResult<Object> append(@Validated @RequestBody ConfirmAppendQo info, HttpSession session) throws Exception {
         if (info.getOrderId() == 0){
-            return RestResult.error("orderId：创建人Id不能为空");
+            return RestResult.error("orderId：订单Id不能为空");
         }
         if (info.getUserId() == 0){
-            return RestResult.error("userId：计划人数不能为空");
+            return RestResult.error("userId：用户id不能为空");
         }
         Order order = orderService.selectById(info.getOrderId());
         if (!Validator.isNotNull(order)){
@@ -122,10 +121,6 @@ public class ConfirmController {
         if (!Validator.isNotNull(info.getStatus()) || info.getStatus() == 0){
             return RestResult.error("status：确认状态不能为空");
         }
-        Order order = orderService.selectById(info.getOrderId());
-        if (!Validator.isNotNull(order)){
-            return RestResult.error("订单不存在");
-        }
         String userName = jwtTokenUtils.getTokenUserName(request);
         User user = userService.selectById(Long.parseLong(userName));
         Confirm confirm = service.selectById(info.getConfirmId());
@@ -137,6 +132,13 @@ public class ConfirmController {
         }
         if (confirm.getStatus() != 1){
             return RestResult.error("当前状态不能更改");
+        }
+        Order order = orderService.selectById(confirm.getOrderId());
+        if (!Validator.isNotNull(order)){
+            return RestResult.error("订单不存在");
+        }
+        if (order.getOrderStatus() == 3 || order.getOrderStatus() == 4){
+            return RestResult.error("当前订单已结束");
         }
         confirm.setStatus(info.getStatus());
         int i = service.update(confirm);
@@ -157,16 +159,16 @@ public class ConfirmController {
         if (!Validator.isNotNull(info.getStatus()) || info.getStatus() == 0){
             return RestResult.error("status：确认状态不能为空");
         }
-        Order order = orderService.selectById(info.getOrderId());
-        if (!Validator.isNotNull(order)){
-            return RestResult.error("订单不存在");
-        }
         Confirm confirm = service.selectById(info.getConfirmId());
         if (!Validator.isNotNull(confirm)){
             return RestResult.error("确认信息不存在");
         }
         if (confirm.getStatus() != 1){
             return RestResult.error("当前状态不能更改");
+        }
+        Order order = orderService.selectById(confirm.getOrderId());
+        if (!Validator.isNotNull(order)){
+            return RestResult.error("订单不存在");
         }
         confirm.setStatus(info.getStatus());
         int i = service.update(confirm);
@@ -198,11 +200,10 @@ public class ConfirmController {
     @ApiOperation("单个查询")
     @ResponseBody
     @RequestMapping("/qryOne")
-    public RestResult<Object> qryOne(@RequestBody Page<Confirm> info, HttpServletRequest request) throws Exception {
-        Confirm confirm = info.getQueryObj();
+    public RestResult<Object> qryOne(@RequestBody Confirm info, HttpServletRequest request) throws Exception {
         String tokenUserName = jwtTokenUtils.getTokenUserName(request);
-        confirm.setUserId(Long.parseLong(tokenUserName));
-        Example example = returnQueryExample(confirm);
+        info.setUserId(Long.parseLong(tokenUserName));
+        Example example = returnQueryExample(info);
         List<Confirm> list = mapper.selectByExample(example);
         if (list.size() < 1){
             return RestResult.error("查询为空");
@@ -231,8 +232,8 @@ public class ConfirmController {
     @PreAuthorize("hasAnyRole('admin')")
     @ResponseBody
     @RequestMapping("/qryOneAdmin")
-    public RestResult<Object> qryOneAdmin(@RequestBody Page<Confirm> info, HttpServletRequest request) throws Exception {
-        Example example = returnQueryExample(info.getQueryObj());
+    public RestResult<Object> qryOneAdmin(@RequestBody Confirm info, HttpServletRequest request) throws Exception {
+        Example example = returnQueryExample(info);
         List<Confirm> list = mapper.selectByExample(example);
         if (list.size() < 1){
             return RestResult.error("查询为空");
