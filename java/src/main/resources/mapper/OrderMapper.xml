@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.mapper.OrderMapper">
+
+	<select id="selectOrderUserListByOId" resultType="java.util.Map">
+		SELECT a.user_id as userId,a.nick_name as nickName,a.phone as phone,a.credit_score as creditScore,
+				b.status as confirmStatus
+		FROM sys_user_info a
+		LEFT JOIN sys_order_confirm b ON b.user_id = a.user_id
+		where b.order_id = #{id}
+	</select>
+
+</mapper>
