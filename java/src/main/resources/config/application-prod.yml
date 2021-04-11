@@ -105,18 +105,3 @@ generator:
 #是否开启 swagger-ui
 swagger:
   enabled: false
-
-# 文件存储路径
-file:
-  mac:
-    path: ~/file/
-    avatar: ~/avatar/
-  linux:
-    path: /home/jecho/file/
-    avatar: /home/jecho/avatar/
-  windows:
-    path: C:\jecho\file\
-    avatar: C:\jecho\avatar\
-  # 文件大小 /M
-  maxSize: 100
-  avatarMaxSize: 5
