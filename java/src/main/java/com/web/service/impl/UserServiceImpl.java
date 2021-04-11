@@ -25,13 +25,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int insert(User o) throws Exception {
+        UserSecurity userSecurity = new UserSecurity();
+        userSecurity.setPassword("123456");
+        securityService.signUp(userSecurity);
         o.setUpDataTime(new Date());
         o.setCreateTime(new Date());
-        mapper.insert(o);
+        o.setRegisterStatus(1);
+        o.setUserId(Long.valueOf(userSecurity.getUsername()));
+        return mapper.insert(o);
+    }
+
+    @Override
+    public int insert(User o,String password) throws Exception {
         UserSecurity userSecurity = new UserSecurity();
-        userSecurity.setUsername(o.getUserId());
-        userSecurity.setPassword("123456");
-        return securityService.signUp(userSecurity);
+        userSecurity.setPassword(password);
+        securityService.signUp(userSecurity);
+        o.setUpDataTime(new Date());
+        o.setCreateTime(new Date());
+        o.setRegisterStatus(1);
+        o.setUserId(Long.valueOf(userSecurity.getUsername()));
+        return mapper.insert(o);
     }
 
     @Override

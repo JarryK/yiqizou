@@ -16,8 +16,11 @@ import java.util.List;
 public class SchoolServiceImpl implements SchoolService {
 
     private final SchoolMapper mapper;
+
     @Override
     public int insert(School o) throws Exception {
+        o.setCreateTime(new Date());
+        o.setUpDataTime(new Date());
         return mapper.insert(o);
     }
 

@@ -13,7 +13,15 @@ import java.util.List;
  */
 public interface UserService {
 
+    /**
+     * 默认密码为123456
+     * @param o
+     * @return
+     * @throws Exception
+     */
     public int insert(User o) throws Exception;
+
+    public int insert(User o,String password) throws Exception;
 
     public int delete(User o);
 

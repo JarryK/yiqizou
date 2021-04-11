@@ -63,7 +63,7 @@ public class ConfirmServiceImpl implements ConfirmService { private final IUserS
     @Override
     public Confirm selectById(long id) {
         Confirm o = new Confirm();
-        o.setUserId(id);
+        o.setConfirmId(id);
         return mapper.selectByPrimaryKey(o);
     }
 
