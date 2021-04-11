@@ -53,6 +53,12 @@ public class UserSecurityServiceImpl implements IUserSecurityService{
 		if(!verifyPassword(password)) {
 			throw new Exception("新密码格式有误，密码长度为6至20位");
 		}
+		Long maxUsername = userSecurityMapper.findMaxUsername();
+		if(maxUsername == null || maxUsername < 100000) {	// 最少6位数
+			userSecurity.setUsername(100000L);
+		}else {
+			userSecurity.setUsername(maxUsername+1);
+		}
         PasswordEncoder encoder = new JechoPasswordEncoder();
         userSecurity.setPassword(encoder.encode(password));
         userSecurity.setCreateBy("");
