@@ -24,4 +24,15 @@ public interface UserService {
     public User selectByOpenId(String id);
 
     public List<User> selectAll();
+
+    /**
+     * 用户信用分增加
+     */
+    public void creditScoreBonus(long id,double score) throws Exception;
+
+    /**
+     * 用户信用分减少
+     */
+    public void creditScoreDeduction(long id,double score) throws Exception;
+
 }
