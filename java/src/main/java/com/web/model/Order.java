@@ -1,5 +1,6 @@
 package com.web.model;
 
+import com.web.base.TimeModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,13 +18,13 @@ import java.util.Date;
 @Setter
 @EqualsAndHashCode(callSuper=false)
 @Entity
-@Table(name = "order")
+@Table(name = "sys_order")
 public class Order extends TimeModel {
     @Id
     @Column(name = "order_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(value = "订单Id")
-    private long orderId;
+    private Long orderId;
 
     @Column(name = "start_location")
     @ApiModelProperty(value = "出发地址")
@@ -39,7 +40,7 @@ public class Order extends TimeModel {
 
     @Column(name = "create_man")
     @ApiModelProperty(value = "创建人")
-    private long createMan;
+    private String createMan;
 
     @Column(name = "start_time")
     @ApiModelProperty(value = "出发时间")
@@ -62,7 +63,10 @@ public class Order extends TimeModel {
     private String remark;
 
     @Column(name = "order_status")
-    @ApiModelProperty(value = "订单状态")
-    private String orderStatus;
+    @ApiModelProperty(value = "订单状态 1=拼单中 2=拼单完成 3=订单结束 4=取消")
+    private int orderStatus;
 
+    @Column(name = "platform")
+    @ApiModelProperty(value = "使用平台")
+    private String platform;
 }

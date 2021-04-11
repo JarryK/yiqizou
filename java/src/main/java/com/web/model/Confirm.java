@@ -1,5 +1,6 @@
 package com.web.model;
 
+import com.web.base.TimeModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,13 +17,13 @@ import javax.persistence.Table;
 @Setter
 @EqualsAndHashCode(callSuper=false)
 @Entity
-@Table(name = "order_confirm")
-public class Confirm extends TimeModel{
+@Table(name = "sys_order_confirm")
+public class Confirm extends TimeModel {
     @Id
     @Column(name = "confirm_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(value = "流水Id")
-    private long confirmId;
+    private Long confirmId;
 
     @Column(name = "order_id")
     @ApiModelProperty(value = "订单id")
@@ -31,5 +32,9 @@ public class Confirm extends TimeModel{
     @Column(name = "user_id")
     @ApiModelProperty(value = "用户ID")
     private long userId;
+
+    @Column(name = "status")
+    @ApiModelProperty(value = "确认状态 1=待确认 2=确认")
+    private int status;
 
 }

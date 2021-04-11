@@ -1,5 +1,6 @@
 package com.web.model;
 
+import com.web.base.TimeModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,11 +23,11 @@ public class Register extends TimeModel {
     @Column(name = "register_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(value = "流水Id")
-    private long register_id;
+    private Long registerId;
 
     @Column(name = "user_id")
     @ApiModelProperty(value = "用户Id")
-    private long user_id;
+    private long userId;
 
     @Column(name = "register_photo1")
     @ApiModelProperty(value = "认证照片1")

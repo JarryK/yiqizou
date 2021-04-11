@@ -22,7 +22,7 @@ public class School {
     @Column(name = "school_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(value = "学校id")
-    private long schoolId;
+    private Long schoolId;
 
     @Column(name = "school_name")
     @ApiModelProperty(value = "学校名")

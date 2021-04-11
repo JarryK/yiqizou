@@ -1,5 +1,6 @@
 package com.web.model;
 
+import com.web.base.TimeModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -76,7 +77,7 @@ public class User extends TimeModel {
 
     @Column(name = "credit_score")
     @ApiModelProperty(value = "信用分")
-    private String creditScore;
+    private double creditScore;
 
     @Column(name = "register_id")
     @ApiModelProperty(value = "认证Id")
