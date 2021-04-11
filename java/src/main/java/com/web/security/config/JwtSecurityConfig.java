@@ -103,7 +103,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 //允许匿名及登录用户访问
                 .antMatchers(
-                		"/yqz/auth/**",
+                		"/yqz/**/**",
                 		"/error/**",
                 		"/test/**",
                 		"/**/signUp/**",

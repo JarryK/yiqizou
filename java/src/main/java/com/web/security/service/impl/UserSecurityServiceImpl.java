@@ -1,7 +1,7 @@
 package com.web.security.service.impl;
 
 import com.web.hotdata.HotDataStore;
-import com.web.dao.UserMapper;
+import com.web.mapper.UserMapper;
 import com.web.model.User;
 import com.web.security.custom.JechoPasswordEncoder;
 import com.web.security.jwt.JwtSecurityProperties;
