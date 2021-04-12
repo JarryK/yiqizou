@@ -4,28 +4,23 @@ import cn.hutool.core.lang.Validator;
 import com.web.base.RestResult;
 import com.web.mapper.AdminMapper;
 import com.web.model.Admin;
-import com.web.model.Confirm;
-import com.web.model.Order;
-import com.web.model.User;
 import com.web.model.qo.AdminSignUp;
-import com.web.model.qo.OrderAppendQo;
 import com.web.security.model.qo.AuthUserQo;
 import com.web.security.service.IUserSecurityService;
 import com.web.service.AdminService;
-import com.web.util.DateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpSession;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -40,7 +35,7 @@ public class AdminController {
 
     @ApiOperation("登录")
     @ResponseBody
-    @RequestMapping("/signIn")
+    @PostMapping("/signIn")
     public RestResult<Object> append(@Validated @RequestBody AuthUserQo info, HttpSession session) throws Exception {
         String username = info.getUsername();
         String key = "";
@@ -62,7 +57,7 @@ public class AdminController {
     @ApiOperation("注册")
     @PreAuthorize("hasAnyRole('admin')")
     @ResponseBody
-    @RequestMapping("/signUp")
+    @PostMapping("/signUp")
     public RestResult<Object> signUp(@Validated @RequestBody AdminSignUp info, HttpSession session) throws Exception {
         if (!Validator.isMobile(info.getPhone())){
             return RestResult.error("手机格式不正确");

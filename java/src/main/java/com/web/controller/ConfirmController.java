@@ -11,20 +11,18 @@ import com.web.model.Confirm;
 import com.web.model.Order;
 import com.web.model.User;
 import com.web.model.qo.ConfirmAppendQo;
-import com.web.model.qo.OrderAppendQo;
-import com.web.model.qo.OrderQueryQo;
 import com.web.security.jwt.JwtTokenUtils;
 import com.web.service.ConfirmService;
 import com.web.service.OrderService;
 import com.web.service.ScoreService;
 import com.web.service.UserService;
-import com.web.util.DateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,7 +49,7 @@ public class ConfirmController {
 
     @ApiOperation("新增确认信息")
     @ResponseBody
-    @RequestMapping("/append")
+    @PostMapping("/append")
     public RestResult<Object> append(@Validated @RequestBody ConfirmAppendQo info, HttpSession session) throws Exception {
         if (info.getOrderId() == 0){
             return RestResult.error("orderId：订单Id不能为空");
@@ -87,7 +85,7 @@ public class ConfirmController {
     @ApiOperation("删除订单确认信息")
     @PreAuthorize("hasAnyRole('admin')")
     @ResponseBody
-    @RequestMapping("/remove")
+    @PostMapping("/remove")
     public RestResult<Object> remove(@RequestBody Confirm info, HttpServletRequest request) throws Exception {
         if (!Validator.isNotNull(info.getConfirmId()) || info.getConfirmId() == 0){
             return RestResult.error("confirmId：流水Id不能为空");
@@ -113,7 +111,7 @@ public class ConfirmController {
 
     @ApiOperation("更新确认信息状态")
     @ResponseBody
-    @RequestMapping("/upStatus")
+    @PostMapping("/upStatus")
     public RestResult<Object> upStatus(@RequestBody Confirm info, HttpServletRequest request) throws Exception {
         if (!Validator.isNotNull(info.getConfirmId()) || info.getConfirmId() == 0){
             return RestResult.error("confirmId：流水Id不能为空");
@@ -151,7 +149,7 @@ public class ConfirmController {
     @ApiOperation("更新确认信息状态")
     @PreAuthorize("hasAnyRole('admin')")
     @ResponseBody
-    @RequestMapping("/upStatusAdmin")
+    @PostMapping("/upStatusAdmin")
     public RestResult<Object> upStatusAdmin(@RequestBody Confirm info, HttpServletRequest request) throws Exception {
         if (!Validator.isNotNull(info.getConfirmId()) || info.getConfirmId() == 0){
             return RestResult.error("confirmId：流水Id不能为空");
@@ -180,7 +178,7 @@ public class ConfirmController {
 
     @ApiOperation("分页查询")
     @ResponseBody
-    @RequestMapping("/qry")
+    @PostMapping("/qry")
     public RestResult<Object> qry(@RequestBody Page<Confirm> info, HttpServletRequest request) throws Exception {
         Confirm confirm = info.getQueryObj();
         String tokenUserName = jwtTokenUtils.getTokenUserName(request);
@@ -199,7 +197,7 @@ public class ConfirmController {
 
     @ApiOperation("单个查询")
     @ResponseBody
-    @RequestMapping("/qryOne")
+    @PostMapping("/qryOne")
     public RestResult<Object> qryOne(@RequestBody Confirm info, HttpServletRequest request) throws Exception {
         String tokenUserName = jwtTokenUtils.getTokenUserName(request);
         info.setUserId(Long.parseLong(tokenUserName));
@@ -214,7 +212,7 @@ public class ConfirmController {
     @ApiOperation("分页查询")
     @PreAuthorize("hasAnyRole('admin')")
     @ResponseBody
-    @RequestMapping("/qryAdmin")
+    @PostMapping("/qryAdmin")
     public RestResult<Object> qryAdmin(@RequestBody Page<Confirm> info, HttpServletRequest request) throws Exception {
         Example example = returnQueryExample(info.getQueryObj());
         // 按照创建时间排序
@@ -231,7 +229,7 @@ public class ConfirmController {
     @ApiOperation("单个查询")
     @PreAuthorize("hasAnyRole('admin')")
     @ResponseBody
-    @RequestMapping("/qryOneAdmin")
+    @PostMapping("/qryOneAdmin")
     public RestResult<Object> qryOneAdmin(@RequestBody Confirm info, HttpServletRequest request) throws Exception {
         Example example = returnQueryExample(info);
         List<Confirm> list = mapper.selectByExample(example);

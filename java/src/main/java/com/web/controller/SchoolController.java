@@ -7,17 +7,14 @@ import com.web.base.Page;
 import com.web.base.RestResult;
 import com.web.mapper.SchoolMapper;
 import com.web.model.Confirm;
-import com.web.model.Order;
 import com.web.model.School;
-import com.web.model.User;
-import com.web.model.qo.ConfirmAppendQo;
 import com.web.service.SchoolService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +36,7 @@ public class SchoolController {
     @ApiOperation("新增")
     @PreAuthorize("hasAnyRole('admin')")
     @ResponseBody
-    @RequestMapping("/append")
+    @PostMapping("/append")
     public RestResult<Object> append(@RequestBody School info, HttpSession session) throws Exception {
         if (!Validator.isNotNull(info.getSchoolName())){
             return RestResult.error("schoolName：学校名不能为空");
@@ -54,7 +51,7 @@ public class SchoolController {
     @ApiOperation("删除信息")
     @PreAuthorize("hasAnyRole('admin')")
     @ResponseBody
-    @RequestMapping("/remove")
+    @PostMapping("/remove")
     public RestResult<Object> remove(@RequestBody School info, HttpServletRequest request) throws Exception {
         if (!Validator.isNotNull(info.getSchoolId()) || info.getSchoolId() == 0){
             return RestResult.error("schoolId：学校Id不能为空");
@@ -73,7 +70,7 @@ public class SchoolController {
     @ApiOperation("更新学校名")
     @PreAuthorize("hasAnyRole('admin')")
     @ResponseBody
-    @RequestMapping("/upName")
+    @PostMapping("/upName")
     public RestResult<Object> upStatus(@RequestBody School info, HttpServletRequest request) throws Exception {
         if (!Validator.isNotNull(info.getSchoolId()) || info.getSchoolId() == 0){
             return RestResult.error("schoolId：学校Id不能为空");
@@ -95,7 +92,7 @@ public class SchoolController {
 
     @ApiOperation("分页查询")
     @ResponseBody
-    @RequestMapping("/qry")
+    @PostMapping("/qry")
     public RestResult<Object> qry(@RequestBody Page<School> info, HttpServletRequest request) throws Exception {
         Example example = returnQueryExample(info.getQueryObj());
         // 按照创建时间排序
@@ -111,7 +108,7 @@ public class SchoolController {
 
     @ApiOperation("单个查询")
     @ResponseBody
-    @RequestMapping("/qryOne")
+    @PostMapping("/qryOne")
     public RestResult<Object> qryOne(@RequestBody School info, HttpServletRequest request) throws Exception {
         Example example = returnQueryExample(info);
         List<School> list = mapper.selectByExample(example);

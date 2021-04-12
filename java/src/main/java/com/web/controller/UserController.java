@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,13 +31,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-/**
- * <b>项目名称：</b>yiziqou<br>
- * <b>类所处包：</b>java.com.web.Controller<br>
- * <b>创建人：</b><br>
- * <b>类描述：</b><br>
- * <b>创建时间：</b>2020/11/23 23:07<br>
- */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/yqz/user")
@@ -54,7 +48,7 @@ public class UserController {
 
     @ApiOperation("微信登录,没有就会默认录入信息")
     @ResponseBody
-    @RequestMapping("/wxLogin")
+    @PostMapping("/wxLogin")
     public RestResult<Object> getUserInfo(@RequestBody WeiXinLogin info, HttpSession session) throws Exception {
         try {
             log.info("inMap:" + JSON.toJSONString(info));
@@ -74,7 +68,7 @@ public class UserController {
             String avatarUrl = MapUtils.getString(userInfo,"avatarUrl");
             User user = new User();
             user.setOpenId(openid);
-            user.setNickName(nickName);
+            user.setNickName("我是默认昵称");
             user.setGender(gender);
             user.setLanguage(language);
             user.setCity(city);
@@ -86,10 +80,7 @@ public class UserController {
             User user_info = service.selectByOpenId(openid);
             if (Validator.isNotNull(user_info)){
                 user.setUserId(user_info.getUserId());
-                int i = service.update(user);
-                if (i < 1){
-                    return RestResult.error("更新用户信息失败！");
-                }
+                user = user_info;
             }else {
                 int i = service.insert(user);
                 if (i < 1){
@@ -105,8 +96,29 @@ public class UserController {
 
     @ApiOperation("账号密码登录")
     @ResponseBody
-    @RequestMapping("/signIn")
+    @PostMapping("/signIn")
     public RestResult<Object> getUserInfo(@Validated @RequestBody AuthUserQo info, HttpSession session) throws Exception {
+        String username = info.getUsername();
+        String key = "";
+        if (Validator.isMobile(username)){
+            key = "phone";
+        }else {
+            key = "userId";
+        }
+        Example example = new Example(User.class);
+        example.createCriteria().andEqualTo(key,username);
+        List<User> userList = mapper.selectByExample(example);
+        if (userList.size() < 1 ){
+            return RestResult.error("用户不存在");
+        }
+        info.setUsername(String.valueOf(userList.get(0).getUserId()));
+        return RestResult.success("登录成功",userSecurityService.login(info) );
+    }
+
+    @ApiOperation("账号密码登录")
+    @ResponseBody
+    @PostMapping("/signUp")
+    public RestResult<Object> signUp(@Validated @RequestBody AuthUserQo info, HttpSession session) throws Exception {
         String username = info.getUsername();
         String key = "";
         if (Validator.isMobile(username)){

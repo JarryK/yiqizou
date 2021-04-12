@@ -26,6 +26,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,7 +60,7 @@ public class OrderController {
 
     @ApiOperation("新增订单")
     @ResponseBody
-    @RequestMapping("/append")
+    @PostMapping("/append")
     public RestResult<Object> append(@Validated @RequestBody OrderAppendQo info, HttpSession session) throws Exception {
         if (info.getCreateManId() == 0){
             return RestResult.error("createManId：创建人Id不能为空");
@@ -103,7 +104,7 @@ public class OrderController {
 
     @ApiOperation("删除")
     @ResponseBody
-    @RequestMapping("/remove")
+    @PostMapping("/remove")
     public RestResult<Object> remove(@RequestBody Order info, HttpServletRequest request) throws Exception {
         if (!Validator.isNotNull(info.getOrderId()) || info.getOrderId() == 0){
             return RestResult.error("orderId：订单id不能为空");
@@ -155,7 +156,7 @@ public class OrderController {
     @ApiOperation("管理员删除")
     @PreAuthorize("hasAnyRole('admin')")
     @ResponseBody
-    @RequestMapping("/removeAdmin")
+    @PostMapping("/removeAdmin")
     public RestResult<Object> removeAdmin(@RequestBody Order info, HttpServletRequest request) throws Exception {
         if (!Validator.isNotNull(info.getOrderId()) || info.getOrderId() == 0){
             return RestResult.error("orderId：订单id不能为空");
@@ -173,7 +174,7 @@ public class OrderController {
 
     @ApiOperation("更新状态")
     @ResponseBody
-    @RequestMapping("/upStatus")
+    @PostMapping("/upStatus")
     public RestResult<Object> upStatus(@RequestBody Order info, HttpServletRequest request) throws Exception {
         if (!Validator.isNotNull(info.getOrderId()) || info.getOrderId() == 0){
             return RestResult.error("orderId：订单id不能为空");
@@ -196,7 +197,7 @@ public class OrderController {
     @ApiOperation("更新状态")
     @PreAuthorize("hasAnyRole('admin')")
     @ResponseBody
-    @RequestMapping("/upStatusAdmin")
+    @PostMapping("/upStatusAdmin")
     public RestResult<Object> upStatusAdmin(@RequestBody Order info, HttpServletRequest request) throws Exception {
         if (!Validator.isNotNull(info.getOrderId()) || info.getOrderId() == 0){
             return RestResult.error("orderId：订单id不能为空");
@@ -274,7 +275,7 @@ public class OrderController {
 
     @ApiOperation("分页查询")
     @ResponseBody
-    @RequestMapping("/qry")
+    @PostMapping("/qry")
     public RestResult<Object> qry(@RequestBody Page<OrderQueryQo> info, HttpServletRequest request) throws Exception {
         OrderQueryQo order = info.getQueryObj();
         // 按照订单出发时间排序
@@ -291,7 +292,7 @@ public class OrderController {
 
     @ApiOperation("单个查询")
     @ResponseBody
-    @RequestMapping("/qryOne")
+    @PostMapping("/qryOne")
     public RestResult<Object> qryOne(@RequestBody OrderQueryQo info , HttpServletRequest request) throws Exception {
         List<Order> list = mapper.selectByExample(returnQueryExample(info));
         if (list.size() < 1){
@@ -352,7 +353,7 @@ public class OrderController {
 
     @ApiOperation("查询订单用户列表")
     @ResponseBody
-    @RequestMapping("/qryOrderUser")
+    @PostMapping("/qryOrderUser")
     public RestResult<Object> qryOrderUser(@RequestBody Order info , HttpServletRequest request) throws Exception {
         if (!Validator.isNotNull(info.getOrderId()) || info.getOrderId() == 0){
             return RestResult.error("orderId：订单Id不能为空");

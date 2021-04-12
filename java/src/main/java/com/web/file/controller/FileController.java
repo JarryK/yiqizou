@@ -27,7 +27,7 @@ public class FileController {
 	@ApiOperation("上传文件")
 	@PostMapping("/uploadFile")
 	public RestResult<Object> uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception{
-		return RestResult.success(userFileService.uploadFile(file, request));
+		return RestResult.success(userFileService.uploadFile(file));
 	}
 	
 	@ApiOperation("下载文件")

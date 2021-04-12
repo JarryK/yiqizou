@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/ssg/role")
+@RequestMapping("/yqz/role")
 @Api(tags = "Core-权限：角色接口")
 public class RoleController {
 	

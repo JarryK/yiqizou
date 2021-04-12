@@ -43,6 +43,4 @@ public class UserFile extends TimeModel {
 	@ApiModelProperty(value = "是否为图片文件",example = "true")
 	private Boolean isImg;
 
-	private String createBy;
-	
 }

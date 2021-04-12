@@ -29,7 +29,7 @@ public class UserFileServiceImpl implements UserFileService{
 	private final UserFileMapper userFileMapper;
 
 	@Override
-	public UserFile uploadFile(MultipartFile file, HttpServletRequest request) throws Exception {
+	public UserFile uploadFile(MultipartFile file) throws Exception {
 		Long sizeKB = file.getSize() >> 10;	// 除1024转KB单位
 		if(file.getSize() > 0 && file.getSize() <1024) {
 			sizeKB = 1L;
@@ -40,8 +40,6 @@ public class UserFileServiceImpl implements UserFileService{
 		
 		// 保存文件
 		String realName = FileUtil.uploadFile(file, properties.getPath(), file.getResource().getFilename());
-		
-		String username = tokenUtils.getTokenUserName(request);
 		UserFile userFile = new UserFile();
 		userFile.setFileName(file.getResource().getFilename());
 		userFile.setRealName(realName);

@@ -47,6 +47,10 @@ public class User extends TimeModel {
     @ApiModelProperty(value = "用户名")
     private String nickName;
 
+    @Column(name = "real_name")
+    @ApiModelProperty(value = "真实名字")
+    private String realName;
+
     @Column(name = "gender")
     @ApiModelProperty(value = "用户id")
     private int gender;

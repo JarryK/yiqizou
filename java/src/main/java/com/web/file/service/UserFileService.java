@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface UserFileService {
 
-	public UserFile uploadFile(MultipartFile file, HttpServletRequest request) throws Exception;
+	public UserFile uploadFile(MultipartFile file) throws Exception;
 
 	public void downloadFile(Long id, HttpServletResponse response) throws Exception ;
 	

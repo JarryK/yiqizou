@@ -27,7 +27,7 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/ssg/auth")
+@RequestMapping("/yqz/auth")
 @Api(tags = "Core-权限：系统授权接口")
 public class AuthController {
 	

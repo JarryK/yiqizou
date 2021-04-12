@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/ssg/userRole")
+@RequestMapping("/yqz/userRole")
 @Api(tags = "Core-权限：用户角色接口")
 public class UserRoleController {
 	

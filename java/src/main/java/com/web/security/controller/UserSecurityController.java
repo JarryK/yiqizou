@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/ssg/userSecurity")
+@RequestMapping("/yqz/userSecurity")
 @Api(tags = "Core-权限：用户账号接口")
 public class UserSecurityController {
 	

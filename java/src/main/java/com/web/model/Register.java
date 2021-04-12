@@ -31,19 +31,19 @@ public class Register extends TimeModel {
 
     @Column(name = "register_photo1")
     @ApiModelProperty(value = "认证照片1")
-    private long registerPhoto1;
+    private String registerPhoto1;
 
     @Column(name = "register_photo3")
     @ApiModelProperty(value = "认证照片2")
-    private long registerPhoto2;
+    private String registerPhoto2;
 
     @Column(name = "register_photo3")
     @ApiModelProperty(value = "认证照片3")
-    private long registerPhoto3;
+    private String registerPhoto3;
 
     @Column(name = "register_status")
-    @ApiModelProperty(value = "认证状态")
-    private long registerStatus;
+    @ApiModelProperty(value = "认证状态 1=待认证 2=通过 3=未通过")
+    private int registerStatus;
 
     @Column(name = "register_man_id")
     @ApiModelProperty(value = "审批人Id")
@@ -51,13 +51,5 @@ public class Register extends TimeModel {
 
     @Column(name = "register_man")
     @ApiModelProperty(value = "审批人")
-    private long registerMan;
-
-
-
-
-
-
-
-
+    private String registerMan;
 }
